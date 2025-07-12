@@ -97,6 +97,25 @@ public class HomeController {
         return "/service";
     }
 
+    @GetMapping("/menu")
+    public String menu(Model model){
+        List<CategoryDto> categories=categoryService.getAllCategories();
+        model.addAttribute("categories", categories);
+
+        List<PriceDto> prices=priceService.getAllPrices();
+        model.addAttribute("prices", prices);
+
+        List<MenuItemDto> menuItems = menuItemService.getAllMenuItems();
+        model.addAttribute("menuItems", menuItems);
+
+        Set<CategoryDto> uniqueCategories = menuItems.stream()
+                .map(MenuItemDto::getCategory) // hər menuItem-dən category-ni çıxar
+                .collect(Collectors.toCollection(LinkedHashSet::new)); // təkrarsız və sıralı
+
+        model.addAttribute("uniqueCategories", uniqueCategories);
+        return "/menu";
+    }
+
     @GetMapping("/booking")
     public String booking(Model model){
         return "/booking";
