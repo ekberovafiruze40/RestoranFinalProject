@@ -1,26 +1,23 @@
-package az.edu.itbrains.restoranfinalproject.models;
+package az.edu.itbrains.restoranfinalproject.dtos.booking;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "bookings")
-public class Booking {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class BookingDto {
     private Long id;
-
     private String name;
     private String email;
+
+    @DateTimeFormat(pattern = "MM/dd/yyyy hh:mm a")
     private LocalDateTime dateTime;
+
     private int numberOfPeople;
-    @Column(length = 1000)
     private String specialRequest;
 }

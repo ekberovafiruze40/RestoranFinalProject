@@ -2,6 +2,7 @@ package az.edu.itbrains.restoranfinalproject.controllers;
 
 import az.edu.itbrains.restoranfinalproject.dtos.about.AboutDto;
 import az.edu.itbrains.restoranfinalproject.dtos.banner.BannerDto;
+import az.edu.itbrains.restoranfinalproject.dtos.booking.BookingDto;
 import az.edu.itbrains.restoranfinalproject.dtos.category.CategoryDto;
 import az.edu.itbrains.restoranfinalproject.dtos.gallery.GalleryImageDto;
 import az.edu.itbrains.restoranfinalproject.dtos.menuItem.MenuItemDto;
@@ -32,8 +33,9 @@ public class HomeController {
     private final PriceService priceService;
     private final MenuItemService menuItemService;
     private final TestimonialService testimonialService;
+    private final BookingService bookingService;
 
-    public HomeController(AboutService aboutService, GalleryImageService galleryImageService, ServiceService service, BannerService bannerService, OurTeamService ourTeamService, CategoryService categoryService, PriceService priceService, MenuItemService menuItemService, TestimonialService testimonialService) {
+    public HomeController(AboutService aboutService, GalleryImageService galleryImageService, ServiceService service, BannerService bannerService, OurTeamService ourTeamService, CategoryService categoryService, PriceService priceService, MenuItemService menuItemService, TestimonialService testimonialService, BookingService bookingService) {
         this.aboutService = aboutService;
         this.galleryImageService = galleryImageService;
         this.service = service;
@@ -43,6 +45,7 @@ public class HomeController {
         this.priceService = priceService;
         this.menuItemService = menuItemService;
         this.testimonialService = testimonialService;
+        this.bookingService = bookingService;
     }
 
     @GetMapping("/")
@@ -87,6 +90,13 @@ public class HomeController {
 
     @GetMapping("/about")
     public String about(Model model){
+        AboutDto aboutDto = aboutService.getAboutInfo();
+        model.addAttribute("about", aboutDto);
+
+
+        List<GalleryImageDto> galleryImages=galleryImageService.getAllImages();
+        model.addAttribute("galleryImages", galleryImages);
+
         return "/about";
     }
 
@@ -118,6 +128,7 @@ public class HomeController {
 
     @GetMapping("/booking")
     public String booking(Model model){
+        model.addAttribute("bookings", bookingService.getAllBookings());
         return "/booking";
     }
 
@@ -133,6 +144,11 @@ public class HomeController {
         List<TestimonialDto> testimonials=testimonialService.getAllTestimonials();
         model.addAttribute("testimonials", testimonials);
         return "/testimonial";
+    }
+
+    @GetMapping("/contact")
+    public String contact(Model model){
+        return "/contact";
     }
 
 
