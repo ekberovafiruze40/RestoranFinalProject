@@ -1,6 +1,5 @@
-package az.edu.itbrains.restoranfinalproject.models;
+package az.edu.itbrains.restoranfinalproject.dtos.footer;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,13 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "footer")
-public class Footer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class FooterDto {
     private Long id;
-
     private String company;
     private String contact;
     private String opening;
@@ -42,4 +36,5 @@ public class Footer {
     private String sunDay;
     private String weekdayHours;
     private String sundayHours;
+
 }

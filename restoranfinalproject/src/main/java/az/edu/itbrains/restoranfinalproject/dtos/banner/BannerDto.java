@@ -12,5 +12,4 @@ public class BannerDto {
     private String title;
     private String description;
     private String imageUrl;
-    private String redirectUrl;
 }

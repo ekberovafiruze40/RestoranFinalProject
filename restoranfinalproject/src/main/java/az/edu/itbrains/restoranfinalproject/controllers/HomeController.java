@@ -4,6 +4,8 @@ import az.edu.itbrains.restoranfinalproject.dtos.about.AboutDto;
 import az.edu.itbrains.restoranfinalproject.dtos.banner.BannerDto;
 import az.edu.itbrains.restoranfinalproject.dtos.booking.BookingDto;
 import az.edu.itbrains.restoranfinalproject.dtos.category.CategoryDto;
+import az.edu.itbrains.restoranfinalproject.dtos.contact.ContactInfoDto;
+import az.edu.itbrains.restoranfinalproject.dtos.footer.FooterDto;
 import az.edu.itbrains.restoranfinalproject.dtos.gallery.GalleryImageDto;
 import az.edu.itbrains.restoranfinalproject.dtos.menuItem.MenuItemDto;
 import az.edu.itbrains.restoranfinalproject.dtos.ourTeam.OurTeamDto;
@@ -34,8 +36,10 @@ public class HomeController {
     private final MenuItemService menuItemService;
     private final TestimonialService testimonialService;
     private final BookingService bookingService;
+    private final ContactInfoService contactInfoService;
+    private final FooterService footerService;
 
-    public HomeController(AboutService aboutService, GalleryImageService galleryImageService, ServiceService service, BannerService bannerService, OurTeamService ourTeamService, CategoryService categoryService, PriceService priceService, MenuItemService menuItemService, TestimonialService testimonialService, BookingService bookingService) {
+    public HomeController(AboutService aboutService, GalleryImageService galleryImageService, ServiceService service, BannerService bannerService, OurTeamService ourTeamService, CategoryService categoryService, PriceService priceService, MenuItemService menuItemService, TestimonialService testimonialService, BookingService bookingService, ContactInfoService contactInfoService, FooterService footerService) {
         this.aboutService = aboutService;
         this.galleryImageService = galleryImageService;
         this.service = service;
@@ -46,6 +50,8 @@ public class HomeController {
         this.menuItemService = menuItemService;
         this.testimonialService = testimonialService;
         this.bookingService = bookingService;
+        this.contactInfoService = contactInfoService;
+        this.footerService = footerService;
     }
 
     @GetMapping("/")
@@ -83,6 +89,7 @@ public class HomeController {
         List<TestimonialDto> testimonials=testimonialService.getAllTestimonials();
         model.addAttribute("testimonials", testimonials);
 
+
         return "/index";
     }
 
@@ -93,9 +100,12 @@ public class HomeController {
         AboutDto aboutDto = aboutService.getAboutInfo();
         model.addAttribute("about", aboutDto);
 
-
         List<GalleryImageDto> galleryImages=galleryImageService.getAllImages();
         model.addAttribute("galleryImages", galleryImages);
+
+
+        List<OurTeamDto> teams=ourTeamService.getAllTeam();
+        model.addAttribute("teams", teams);
 
         return "/about";
     }
@@ -148,6 +158,8 @@ public class HomeController {
 
     @GetMapping("/contact")
     public String contact(Model model){
+        ContactInfoDto contactInfoDto = contactInfoService.getContactInfo();
+        model.addAttribute("contactInfo", contactInfoDto);
         return "/contact";
     }
 

@@ -1,20 +1,14 @@
-package az.edu.itbrains.restoranfinalproject.models;
+package az.edu.itbrains.restoranfinalproject.dtos.contact;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "contacts")
-public class Contact {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@AllArgsConstructor
+public class ContactDto {
     private Long id;
-
     private String name;
     private String email;
     private String subject;

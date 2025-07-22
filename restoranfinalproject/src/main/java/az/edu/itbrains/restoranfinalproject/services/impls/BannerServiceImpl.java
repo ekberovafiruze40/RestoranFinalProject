@@ -24,7 +24,6 @@ public class BannerServiceImpl implements BannerService {
         bannerDto.setTitle(banner.getTitle());
         bannerDto.setDescription(banner.getDescription());
         bannerDto.setImageUrl(banner.getImageUrl());
-        bannerDto.setRedirectUrl(banner.getRedirectUrl());
         return bannerDto;
     }
 }

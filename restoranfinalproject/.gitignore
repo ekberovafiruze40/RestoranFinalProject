@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+# Gizli konfiqurasiya faylı (.env)
+.env

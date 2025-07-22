@@ -18,5 +18,4 @@ public class Banner {
     private String title;
     private String description;
     private String imageUrl;
-    private String redirectUrl;
 }
