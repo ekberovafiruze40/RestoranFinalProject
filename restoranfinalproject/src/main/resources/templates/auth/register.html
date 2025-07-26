@@ -57,61 +57,75 @@
             color: #666;
             margin-top: 5px;
         }
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
 
 <div layout:fragment="content">
+
+    <div class="container-xxl py-5 bg-dark hero-header mb-5">
+        <div class="container text-center my-5 pt-5 pb-4">
+            <h1 class="display-3 text-white mb-3 animated slideInDown">Qeydiyyat</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center text-uppercase">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                    <li class="breadcrumb-item text-white active" aria-current="page">Register</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="auth-container">
                     <h2 class="auth-title">Create Your Account</h2>
 
-                    <div th:if="${error}" class="alert alert-danger" role="alert">
-                        <span th:text="${error}"></span>
-                    </div>
+                    <form action="/register" method="post" th:object="${registerDto}">
 
-                    <form th:action="@{/register}" method="post">
+                        <div th:if="${error}" class="alert-danger" role="alert" th:text="${error}"></div>
+
+                        <div th:if="${#fields.hasErrors('*')}">
+                            <ul style="color: #721c24; margin-bottom: 15px;">
+                                <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+                            </ul>
+                        </div>
+
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="firstName" class="form-label">First Name</label>
-                                <input type="text" class="form-control" id="firstName" name="firstName" required>
+                                <input type="text" class="form-control" id="firstName" th:field="*{firstName}" required>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="lastName" class="form-label">Last Name</label>
-                                <input type="text" class="form-control" id="lastName" name="lastName" required>
+                                <input type="text" class="form-control" id="lastName" th:field="*{lastName}" required>
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <label for="email" class="form-label">Email Address</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" required>
+                            <input type="email" class="form-control" id="email" th:field="*{email}" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
+                            <input type="password" class="form-control" id="password" th:field="*{password}" required>
                             <div class="password-requirements">
-                                Password must be at least 8 characters long
+                                Password must be at least 8 characters long, contain uppercase, lowercase, digit and special char
                             </div>
                         </div>
 
                         <div class="mb-4">
                             <label for="confirmPassword" class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
-                        </div>
-
-                        <div class="form-check mb-4">
-                            <input class="form-check-input" type="checkbox" id="terms" required>
-                            <label class="form-check-label" for="terms">
-                                I agree to the <a href="#" class="auth-link">Terms and Conditions</a>
-                            </label>
+                            <input type="password" class="form-control" id="confirmPassword" th:field="*{confirmPassword}" required>
                         </div>
 
                         <button type="submit" class="btn btn-auth w-100">Create Account</button>

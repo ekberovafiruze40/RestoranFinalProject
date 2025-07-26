@@ -29,12 +29,20 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public boolean createBooking(BookingDto bookingDto) {
         LocalDateTime bookingTime = bookingDto.getDateTime();
-        LocalDateTime startTime = bookingTime.minusMinutes(59);
-        LocalDateTime endTime = bookingTime.minusMinutes(59);
 
-        List<Booking> existing = bookingRepository.findAllByDateTimeBetween(startTime,endTime);
-        if (!existing.isEmpty()){
-            return false;
+        if (bookingTime == null) {
+            throw new IllegalArgumentException("Rezervasiya vaxtı boş ola bilməz!");
+        }
+
+        // həmin saatın başlanğıcı və sonu
+        LocalDateTime startTime = bookingTime.withMinute(0).withSecond(0).withNano(0);
+        LocalDateTime endTime = startTime.plusHours(1);
+
+        // bu 1 saat icinde rezervasiya var?
+        List<Booking> existingBookings = bookingRepository.findAllByDateTimeBetween(startTime,endTime);
+
+        if (existingBookings.size() >= 10){
+            return false; // artiq bu sayda rezerv oldugu ucun icaze verilmir
         }
 
         Booking booking = modelMapper.map(bookingDto, Booking.class);

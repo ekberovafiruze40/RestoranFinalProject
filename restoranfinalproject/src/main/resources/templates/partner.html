@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Əlavə Partnyorlarımız</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #f7f7f7;
+        }
+
+        .partners-section {
+          padding: 50px 20px;
+          text-align: center;
+          background-color: #fff;
+        }
+
+        .partners-section h2 {
+          font-size: 32px;
+          color: #333;
+          margin-bottom: 40px;
+        }
+
+        .partners-container {
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: 30px;
+        }
+
+        .partner-card {
+          background-color: #ffffff;
+          border-radius: 12px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          padding: 20px;
+          width: 180px;
+          transition: transform 0.3s ease;
+        }
+
+        .partner-card:hover {
+          transform: translateY(-5px);
+        }
+
+        .partner-card img {
+          width: 100%;
+          height: auto;
+          border-radius: 8px;
+          margin-bottom: 15px;
+        }
+
+        .partner-card p {
+          margin: 0;
+          font-size: 18px;
+          font-weight: bold;
+          color: #444;
+        }
+
+
+        .alt-title {
+            font-size: 42px;
+            font-weight: 700;
+            color: #222;
+            padding-left: 20px;
+            border-left: 8px solid transparent;
+            background-image: linear-gradient(to bottom, #ff6600, #ffaa33);
+            background-clip: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .alt-title::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: -8px;
+          width: 100%;
+          height: 4px;
+          background: linear-gradient(to right, #ff6600, #ffaa33, #ffeecc);
+          border-radius: 4px;
+          opacity: 0.8;
+        }
+
+    </style>
+</head>
+
+<body>
+<div layout:fragment="content">
+
+    <div class="container-xxl position-relative p-0">
+        <div class="container-xxl py-5 bg-dark hero-header mb-5">
+            <div class="container text-center my-5 pt-5 pb-4">
+                <h1 class="display-3 text-white mb-3 animated slideInDown">Partners</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center text-uppercase">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                        <li class="breadcrumb-item text-white active" aria-current="page">Partner</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <section class="partners-section">
+        <h2 class="alt-title" style="color:white; font-size:36px;">Partnyorlarımız</h2>
+
+        <div class="partners-container">
+
+            <div th:each="partner:${partners}" class="partner-card">
+                <img th:src="${partner.photoUrl}" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Foodland_Logo.svg/2560px-Foodland_Logo.svg.png" alt="FoodLand">
+                <p th:text="${partner.title}">Partnyor</p>
+            </div>
+
+        </div>
+    </section>
+
+</div>
+</body>
+</html>

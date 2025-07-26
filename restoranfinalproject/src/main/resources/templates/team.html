@@ -27,8 +27,8 @@
     <div class="container-xxl pt-5 pb-3">
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                <h5 class="section-title ff-secondary text-center text-primary fw-normal">Team Members</h5>
-                <h1 class="mb-5">Our Master Chefs</h1>
+                <h5 class="section-title ff-secondary text-center text-primary fw-normal">Komanda üzvləri</h5>
+                <h1 class="mb-5">Usta aşpazlarımız</h1>
             </div>
             <div class="row g-4" >
                 <div th:each="team:${teams}" class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -39,9 +39,9 @@
                         <h5  th:text="${team.fullName}" class="mb-0" >Full Name</h5>
                         <small th:text="${team.designation}">Designation</small>
                         <div class="d-flex justify-content-center mt-3">
-                            <a class="btn btn-square btn-primary mx-1" th:href="${team.facebookIcon}"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" th:href="${team.twitterIcon}"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" th:href="${team.instagramIcon}"><i class="fab fa-instagram"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" ><i th:class="${team.facebookIcon}" class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" ><i th:class="${team.twitterIcon}" class="fab fa-twitter"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" ><i th:class="${team.instagramIcon}" class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>
