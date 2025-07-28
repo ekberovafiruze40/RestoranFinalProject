@@ -46,6 +46,9 @@ public class SecurityConfig {
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login?logout=true")
                         .permitAll()
+                )
+                .sessionManagement(session-> session
+                        .sessionFixation().newSession()
                 );
 
         return http.build();
