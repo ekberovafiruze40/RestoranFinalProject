@@ -39,7 +39,7 @@
         <div th:each="service:${services}" class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
           <div class="service-item rounded pt-3">
             <div class="p-4">
-              <i th:class="${service.iconUrl}" class="fa fa-3x fa-user-tie text-primary mb-4" style="color:orange"></i>
+              <i th:class="${service.icon}" class="fa fa-3x fa-user-tie text-primary mb-4" style="color:orange"></i>
               <h5 th:text="${service.title}">Master Chefs</h5>
               <p th:text="${service.description}">Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
             </div>

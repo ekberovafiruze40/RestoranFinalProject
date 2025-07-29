@@ -9,12 +9,12 @@ import lombok.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "services")
-public class Service {
+public class ServiceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String iconUrl;
+    private String icon;
     private String title;
     private String description;
 }
