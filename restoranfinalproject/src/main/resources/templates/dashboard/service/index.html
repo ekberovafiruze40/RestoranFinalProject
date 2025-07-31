@@ -5,11 +5,12 @@
         layout:decorate="~{/dashboard/layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Service</title>
 </head>
 <body >
 <div layout:fragment="body">
     <a th:href="@{/admin/service/create}" class="btn btn-outline-success">Create</a>
+    <div style="overflow-x: auto;">
     <table class="table">
         <thead>
         <tr>
@@ -17,7 +18,7 @@
             <th scope="col">Title</th>
             <th scope="col">Description</th>
             <th scope="col">Icon</th>
-
+            <th scope="col">Action</th>
 
         </tr>
         </thead>
@@ -34,6 +35,7 @@
         </tr>
         </tbody>
     </table>
+</div>
 </div>
 
 </body>

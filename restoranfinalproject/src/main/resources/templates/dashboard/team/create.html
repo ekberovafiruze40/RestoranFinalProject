@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+        layout:decorate="~{/dashboard/layout}">
+<head>
+  <meta charset="UTF-8">
+  <title>Create</title>
+</head>
+<body>
+<div layout:fragment="body">
+  <form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+      <input type="text" name="fullName" class="form-control col-4" placeholder="Full Name" required/>
+    </div>
+
+    <div class="form-group">
+      <input type="text" name="imageUrl" class="form-control col-4" placeholder="ImageUrl" step="0.01" required/>
+    </div>
+
+    <div class="form-group">
+      <textarea type="text" name="designation" class="form-control col-4" placeholder="Designation" required></textarea>
+    </div>
+    <div class="form-group">
+      <input type="text"  name="facebookIcon" class="form-control col-4" placeholder="Facebook Icon" required/>
+    </div>
+
+    <div class="form-group">
+      <input type="text"  name="twitterIcon" class="form-control col-4" placeholder="Twitter Icon" required/>
+    </div>
+
+    <div class="form-group">
+      <input type="text"  name="instagramIcon" class="form-control col-4" placeholder="Instagram Icon" required/>
+    </div>
+
+    <div class="form-group">
+      <input type="submit" value="Create" class="btn btn-success"/>
+    </div>
+  </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+        layout:decorate="~{/dashboard/layout}">
+<head>
+  <meta charset="UTF-8">
+  <title>Create</title>
+</head>
+<body>
+<div layout:fragment="body">
+  <form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+      <input type="text" name="icon" class="form-control col-4" placeholder="Icon" required/>
+    </div>
+
+    <div class="form-group">
+      <input type="text" name="description" class="form-control col-4" placeholder="Description" step="0.01" required/>
+    </div>
+
+    <div class="form-group">
+      <textarea type="text" name="imageUrl" class="form-control col-4" placeholder="Image Url" required></textarea>
+    </div>
+    <div class="form-group">
+      <input type="text"  name="clientName" class="form-control col-4" placeholder="Client Name" required/>
+    </div>
+
+    <div class="form-group">
+      <input type="text"  name="profession" class="form-control col-4" placeholder="Profession" required/>
+    </div>
+
+    <div class="form-group">
+      <input type="submit" value="Create" class="btn btn-success"/>
+    </div>
+  </form>
+</div>
+
+</body>
+</html>

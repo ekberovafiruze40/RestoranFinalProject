@@ -14,7 +14,7 @@ public class Testimonial {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String iconUrl;
+    private String icon;
     private String description;
     private String imageUrl;
     private String clientName;

@@ -1,0 +1,17 @@
+package az.edu.itbrains.restoranfinalproject.dtos.contact;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class ContactCreateDto {
+    private String name;
+    private String email;
+    private String subject;
+    private String message;
+}

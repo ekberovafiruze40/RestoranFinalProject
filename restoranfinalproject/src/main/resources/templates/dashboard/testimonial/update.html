@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{/dashboard/layout}">
+<head>
+  <meta charset="UTF-8">
+  <title>Update</title>
+</head>
+<body >
+<div layout:fragment="body">
+  <form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+      <input type="text" name="icon" th:value="${testimonial.icon}" class="form-control col-4"
+             placeholder="Icon" required/>
+    </div>
+    <div class="form-group">
+      <input type="text" name="description" th:value="${testimonial.description}" class="form-control col-4"
+             placeholder="Description" required/>
+    </div>
+
+    <div class="form-group">
+      <input type="text" name="imageUrl" th:value="${testimonial.imageUrl}" class="form-control col-4"
+             placeholder="Image Url" required/>
+    </div>
+
+    <div class="form-group">
+      <input type="text" name="clientName" th:value="${testimonial.clientName}" class="form-control col-4"
+             placeholder="Client Name" required/>
+    </div>
+
+    <div class="form-group">
+      <input type="text" name="profession" th:value="${testimonial.profession}" class="form-control col-4"
+             placeholder="Profession" required/>
+    </div>
+
+
+
+    <div class="form-group">
+      <input type="submit" value="Update" class="btn btn-success"/>
+    </div>
+
+  </form>
+</div>
+
+</body>
+</html>

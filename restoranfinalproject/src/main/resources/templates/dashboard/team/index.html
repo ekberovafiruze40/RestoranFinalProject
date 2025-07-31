@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{/dashboard/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Testimonial</title>
+</head>
+<body >
+<div layout:fragment="body">
+    <a th:href="@{/admin/team/create}" class="btn btn-outline-success">Create</a>
+    <div style="overflow-x: auto;">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Full Name</th>
+            <th scope="col">ImageUrl</th>
+            <th scope="col">Designation</th>
+            <th scope="col">Facebook Icon</th>
+            <th scope="col">Twitter Icon</th>
+            <th scope="col">Instagram Icon</th>
+            <th scope="col">Action</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="team: ${teams}">
+            <th th:text="${team.id}"  scope="row">1</th>
+            <td th:text="${team.fullName}">Mark</td>
+            <td th:text="${team.imageUrl}">Mark</td>
+            <td th:text="${team.designation}">Mark</td>
+            <td th:text="${team.facebookIcon}">Mark</td>
+            <td th:text="${team.twitterIcon}">Mark</td>
+            <td th:text="${team.instagramIcon}">Mark</td>
+            <td>
+                <a th:href="'/admin/team/update/'+${team.id}" class="btn btn-outline-warning">update</a>
+                <a th:href="'/admin/team/delete/'+${team.id}" class="btn btn-outline-danger">delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+
+</body>
+</html>

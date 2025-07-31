@@ -1,18 +1,100 @@
 <!DOCTYPE html>
-<html
-        xmlns:th="http://thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{/dashboard/layout}">
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/dashboard/layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Restoran Admin Paneli</title>
+    <style>
+        .admin-container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 25px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .welcome-header {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+
+        .info-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .info-card {
+            background: white;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            width: 200px;
+        }
+
+        .info-card h3 {
+            color: #3498db;
+            margin-top: 0;
+        }
+    </style>
 </head>
-<body >
+<body>
 <div layout:fragment="body">
+    <div class="admin-container">
+        <div class="welcome-header">
+            <h1>Restoran Admin Panelinə Xoş Gəlmisiniz</h1>
+            <p>İdarəetmə alətləriniz buradadır</p>
+        </div>
 
-    <h1>Admin səhifəsinə xoş gəlmisiz</h1>
+        <div class="info-cards">
+            <div class="info-card">
+                <h3>Menyu Kateqoriyaları</h3>
+                <p>Yemək növlərinə görə bölmələr</p>
+            </div>
 
+            <div class="info-card">
+                <h3>Xidmətlər</h3>
+                <p>Restoran xidmətlərinin idarə edilməsi</p>
+            </div>
+
+            <div class="info-card">
+                <h3>Menyu</h3>
+                <p>Yemək menyusunun idarə edilməsi</p>
+            </div>
+
+            <div class="info-card">
+                <h3>Şef Komandamız</h3>
+                <p>Şeflərimiz haqqında məlumatlar</p>
+            </div>
+
+            <div class="info-card">
+                <h3>Müştəri Rəyləri</h3>
+                <p>Müştəri rəylərinin idarəsi</p>
+            </div>
+
+            <div class="info-card">
+                <h3>Əlaqə</h3>
+                <p>Əlaqə məlumatlarının idarəsi</p>
+            </div>
+
+            <div class="info-card">
+                <h3>Rezervasiyalar</h3>
+                <p>Rezerv olunmuş müştərilər</p>
+            </div>
+
+            <div class="info-card">
+                <h3>Partnyorlar</h3>
+                <p>Əməkdaşlıq etdiyimiz qurumlar</p>
+            </div>
+        </div>
+    </div>
 </div>
-
 </body>
 </html>
