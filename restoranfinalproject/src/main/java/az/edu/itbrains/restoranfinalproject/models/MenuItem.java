@@ -22,7 +22,8 @@ public class MenuItem {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
+//            (cascade = CascadeType.ALL) admin panelde ayri idare etmek ucun
     @JoinColumn(name = "price_id", referencedColumnName = "id")
     private Price price;
 }

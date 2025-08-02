@@ -1,10 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html
+        xmlns:th="http://thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{/dashboard/layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>MenuItem</title>
 </head>
 <body>
-
+<div layout:fragment="body">
+    <a th:href="@{/admin/menu/create}" class="btn btn-outline-success">Create</a>
+    <div style="overflow-x: auto;">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">ImageUrl</th>
+            <th scope="col">Category Name</th>
+            <th scope="col">Category Tag</th>
+            <th scope="col">Category Icon</th>
+            <th scope="col">Price Amount</th>
+            <th scope="col">Price Currency</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="menu : ${menus}">
+            <th th:text="${menu.id}" scope="row">1</th>
+            <td th:text="${menu.name}">Name</td>
+            <td th:text="${menu.description}">Description</td>
+            <td th:text="${menu.imageUrl}">Image</td>
+            <td th:text="${menu.category.name}">Category Name</td>
+            <td th:text="${menu.category.tag}">Category Tag</td>
+            <td th:text="${menu.category.icon}">Category Icon</td>
+            <td th:text="${menu.price.amount}">Price Amount</td>
+            <td th:text="${menu.price.currency}">Currency</td>
+            <td>
+                <a th:href="@{'/admin/menu/update/' + ${menu.id}}" class="btn btn-outline-warning">update</a>
+                <a th:href="@{'/admin/menu/delete/' + ${menu.id}}" class="btn btn-outline-danger">delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</div>
 </body>
 </html>
