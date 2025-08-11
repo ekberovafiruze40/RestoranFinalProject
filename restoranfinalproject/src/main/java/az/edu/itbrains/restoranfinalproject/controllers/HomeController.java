@@ -2,7 +2,6 @@ package az.edu.itbrains.restoranfinalproject.controllers;
 
 import az.edu.itbrains.restoranfinalproject.dtos.about.AboutDto;
 import az.edu.itbrains.restoranfinalproject.dtos.banner.BannerDto;
-import az.edu.itbrains.restoranfinalproject.dtos.booking.BookingDto;
 import az.edu.itbrains.restoranfinalproject.dtos.category.CategoryDto;
 import az.edu.itbrains.restoranfinalproject.dtos.contact.ContactInfoDto;
 import az.edu.itbrains.restoranfinalproject.dtos.gallery.GalleryImageDto;

@@ -48,30 +48,4 @@ public class ContactServiceImpl implements ContactService {
         return result;
     }
 
-    @Override
-    public void createContact(ContactCreateDto contactCreateDto) {
-        Contact contact = new Contact();
-        contact.setName(contactCreateDto.getName());
-        contact.setEmail(contactCreateDto.getEmail());
-        contact.setSubject(contactCreateDto.getSubject());
-        contact.setMessage(contactCreateDto.getMessage());
-        contactRepository.save(contact);
-    }
-
-    @Override
-    public void updateContact(ContactUpdateDto contactUpdateDto, Long id) {
-        Contact contact = contactRepository.findById(id).orElseThrow();
-        contact.setName(contactUpdateDto.getName());
-        contact.setEmail(contactUpdateDto.getEmail());
-        contact.setSubject(contactUpdateDto.getSubject());
-        contact.setMessage(contactUpdateDto.getMessage());
-        contactRepository.save(contact);
-
-    }
-
-    @Override
-    public void deleteContact(Long id) {
-        Contact contact = contactRepository.findById(id).orElseThrow();
-        contactRepository.delete(contact);
-    }
 }

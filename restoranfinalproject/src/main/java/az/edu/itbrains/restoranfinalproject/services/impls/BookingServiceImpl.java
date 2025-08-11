@@ -49,7 +49,7 @@ public class BookingServiceImpl implements BookingService {
         bookingRepository.save(booking);
 
         String subject = "Rezervasiya təsdiqi";
-        String message = "Salam" + booking.getName() + ",\nRezervasiyanız qəbul edildi!\n" +
+        String message = "Salam " + booking.getName() + ",\nRezervasiyanız qəbul edildi!\n" +
                 "Tarix:" + booking.getDateTime() + "\nŞəxs sayı: " + booking.getNumberOfPeople();
 
         emailService.sendEmail(booking.getEmail(), subject, message);

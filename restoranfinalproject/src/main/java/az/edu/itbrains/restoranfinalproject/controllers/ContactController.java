@@ -32,40 +32,6 @@ public class ContactController {
         return "/dashboard/contact/index";
     }
 
-    @GetMapping("/admin/contact/create")
-    public String contactCreate(){
-        return "/dashboard/contact/create";
-    }
-
-    @PostMapping("/admin/contact/create")
-    public String contactCreate(@ModelAttribute("contact")ContactCreateDto contactCreateDto){
-        contactService.createContact(contactCreateDto);
-        return "redirect:/admin/contact";
-    }
-
-    @GetMapping("/admin/contact/update/{id}")
-    public String contactUpdate(@PathVariable Long id, Model model){
-        ContactGetIdDto contactGetIdDto = contactService.getContactId(id);
-        model.addAttribute("contact", contactGetIdDto);
-        return "/dashboard/contact/update";
-    }
-
-    @PostMapping("/admin/contact/update/{id}")
-    public String contactUpdate(@PathVariable Long id, @ModelAttribute("contact")ContactUpdateDto contactUpdateDto){
-        contactService.updateContact(contactUpdateDto, id);
-        return "redirect:/admin/contact";
-    }
-
-    @GetMapping("/admin/contact/delete/{id}")
-    public String contactDelete(@PathVariable Long id){
-        return "/dashboard/contact/delete";
-    }
-
-    @PostMapping("/admin/contact/delete/{id}")
-    public String contactRemove(@PathVariable Long id){
-        contactService.deleteContact(id);
-        return "redirect:/admin/contact";
-    }
 
 
 }

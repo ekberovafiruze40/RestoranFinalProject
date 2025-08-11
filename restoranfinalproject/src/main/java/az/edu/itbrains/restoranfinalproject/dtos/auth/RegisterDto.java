@@ -23,10 +23,6 @@ public class RegisterDto {
     @Email(message = "Enter a valid email address.")
     private String email;
 
-//    @NotEmpty(message = "Username cannot be empty.")
-//    @Size(min = 4, max = 50, message = "Username must be between 4 and 50 characters.")
-//    private String username;
-
     @NotEmpty(message = "Password cannot be empty.")
     @Pattern(
             regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,})",

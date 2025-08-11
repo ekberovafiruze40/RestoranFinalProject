@@ -9,12 +9,14 @@ import az.edu.itbrains.restoranfinalproject.dtos.price.PriceDto;
 import az.edu.itbrains.restoranfinalproject.services.CategoryService;
 import az.edu.itbrains.restoranfinalproject.services.MenuItemService;
 import az.edu.itbrains.restoranfinalproject.services.PriceService;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -49,9 +51,15 @@ public class MenuItemController {
     }
 
     @PostMapping("/admin/menu/create")
-    public String createMenu(@ModelAttribute("menu")MenuCreateDto menuCreateDto){
-        menuItemService.createMenu(menuCreateDto);
-        return "redirect:/admin/menu";
+    public String createMenu(@ModelAttribute("menu")MenuCreateDto menuCreateDto, RedirectAttributes redirectAttributes){
+
+        try {
+            menuItemService.createMenu(menuCreateDto);
+            return "redirect:/admin/menu";
+        } catch (DataIntegrityViolationException e) {
+            redirectAttributes.addFlashAttribute("error", "Bu qiymət artıq başqa bir yeməyə təyin olunub.");
+            return "redirect:/admin/menu/create";
+        }
     }
 
     @GetMapping("/admin/menu/update/{id}")

@@ -11,8 +11,4 @@ public interface ContactService {
     List<ContactGetAllDto> getAllContact();
 
     ContactGetIdDto getContactId(Long id);
-
-    void createContact(ContactCreateDto contactCreateDto);
-    void updateContact(ContactUpdateDto contactUpdateDto, Long id);
-    void deleteContact(Long id);
 }
