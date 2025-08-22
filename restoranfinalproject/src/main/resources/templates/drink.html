@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout}">
+<head>
+  <title>Drink</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #fffaf5;
+    }
+
+    .search-bar {
+        max-width: 600px;
+        margin: 20px auto;
+        display: flex;
+        gap: 10px;
+    }
+
+    .search-bar input {
+        flex: 1;
+        padding: 10px;
+        border: 2px solid #ff6600;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .search-bar button {
+        background-color: #ff6600;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .search-bar button:hover {
+        background-color: #e05500;
+    }
+
+    .drink-list {
+        max-width: 900px;
+        margin: 40px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .drink-item {
+        display: flex;
+        gap: 20px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+        overflow: hidden;
+        transition: transform 0.2s ease;
+    }
+
+    .drink-item:hover {
+        transform: scale(1.02);
+    }
+
+    .drink-item img {
+        width: 200px;
+        height: 150px;
+        object-fit: cover;
+    }
+
+    .drink-info {
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .drink-info h3 {
+        margin: 0 0 8px 0;
+        color: #ff6600;
+    }
+
+    .drink-info p {
+        margin: 0 0 10px 0;
+        color: #555;
+    }
+
+    .drink-price {
+        font-weight: bold;
+        color: #333;
+        font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+<div layout:fragment="content">
+
+  <!-- Başlıq hissəsi (dəyişdirilməyib) -->
+  <div class="container-xxl py-5 bg-dark hero-header mb-5">
+    <div class="container text-center my-5 pt-5 pb-4">
+      <h1 class="display-3 text-white mb-3 animated slideInDown">İçkilərimiz</h1>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb justify-content-center text-uppercase">
+          <li class="breadcrumb-item"><a href="#" class="text-white-50">Home</a></li>
+          <li class="breadcrumb-item"><a href="#" class="text-white-50">Menu</a></li>
+          <li class="breadcrumb-item text-white active" aria-current="page">Drinks</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+    <h5 class="section-title ff-secondary text-center text-primary fw-normal">İçki Menyumuz</h5>
+    <h1 class="mb-5">Dadlı İçkilərimiz</h1>
+  </div>
+
+  <!-- Axtarış paneli -->
+  <form class="search-bar"  method="get"  action="/drink">
+    <input type="text" name="search" th:value="${search}" placeholder="Search drink...">
+    <button type="submit">Search</button>
+  </form>
+
+  <!-- İçkilər siyahısı -->
+  <div class="drink-list">
+    <div th:each="drink:${drinks}" class="drink-item">
+      <img th:src="${drink.imageUrl}" src="https://source.unsplash.com/400x300/?coffee" alt="Espresso">
+      <div class="drink-info">
+        <h3 th:text="${drink.name}" >Espresso</h3>
+        <p th:text="${drink.description}">Strong and bold coffee shot.</p>
+        <div th:text="${drink.price} + ' AZN'" class="drink-price">$2.50</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

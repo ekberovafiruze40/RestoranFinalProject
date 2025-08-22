@@ -4,6 +4,7 @@ import az.edu.itbrains.restoranfinalproject.dtos.contact.*;
 import az.edu.itbrains.restoranfinalproject.models.Contact;
 import az.edu.itbrains.restoranfinalproject.repositories.ContactRepository;
 import az.edu.itbrains.restoranfinalproject.services.ContactService;
+import az.edu.itbrains.restoranfinalproject.services.EmailService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +16,12 @@ public class ContactServiceImpl implements ContactService {
 
     private final ContactRepository contactRepository;
     private final ModelMapper modelMapper;
+    private final EmailService emailService;
 
-    public ContactServiceImpl(ContactRepository contactRepository, ModelMapper modelMapper) {
+    public ContactServiceImpl(ContactRepository contactRepository, ModelMapper modelMapper, EmailService emailService) {
         this.contactRepository = contactRepository;
         this.modelMapper = modelMapper;
+        this.emailService = emailService;
     }
 
     @Override
@@ -29,6 +32,13 @@ public class ContactServiceImpl implements ContactService {
         contact.setSubject(contactDto.getSubject());
         contact.setMessage(contactDto.getMessage());
         contactRepository.save(contact);
+
+        String subject = "Restoran ilə əlaqəniz üçün təşəkkür edirik";
+        String text = "Salam " + contactDto.getName() + ",\n\n" +
+                "Bizimlə əlaqə saxladığınız üçün təşəkkür edirik. " +
+                "Sizin mesajınız qeydə alındı və qısa zamanda sizinlə əlaqə saxlanılacaq.\n\n" +
+                "Hörmətlə,\nRestoran Komandası";
+        emailService.sendEmail(contactDto.getEmail(), subject, text);
     }
 
     @Override

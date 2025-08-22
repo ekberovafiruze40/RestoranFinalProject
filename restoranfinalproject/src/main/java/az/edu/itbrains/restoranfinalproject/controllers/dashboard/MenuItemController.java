@@ -10,6 +10,7 @@ import az.edu.itbrains.restoranfinalproject.services.CategoryService;
 import az.edu.itbrains.restoranfinalproject.services.MenuItemService;
 import az.edu.itbrains.restoranfinalproject.services.PriceService;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +35,7 @@ public class MenuItemController {
     }
 
     @GetMapping("/admin/menu")
+    @PreAuthorize("hasAnyRole('ADMIN','EDITOR')")
     public String menu(Model model){
         List<MenuGetAllDto> menuItems=menuItemService.menuGetAll();
         model.addAttribute("menus", menuItems);
@@ -41,6 +43,7 @@ public class MenuItemController {
     }
 
     @GetMapping("/admin/menu/create")
+    @PreAuthorize("hasRole('ADMIN')")
     public String menuCreate(Model model){
         List<CategoryDto> categories = categoryService.getAllCategories();
         List<PriceDto> prices = priceService.getAllPrices();
@@ -51,6 +54,7 @@ public class MenuItemController {
     }
 
     @PostMapping("/admin/menu/create")
+    @PreAuthorize("hasRole('ADMIN')")
     public String createMenu(@ModelAttribute("menu")MenuCreateDto menuCreateDto, RedirectAttributes redirectAttributes){
 
         try {
@@ -63,6 +67,7 @@ public class MenuItemController {
     }
 
     @GetMapping("/admin/menu/update/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','EDITOR')")
     public String menuUpdate(@PathVariable Long id, Model model){
         MenuGetIdDto menuGetIdDto = menuItemService.menuGetIdDto(id);
         model.addAttribute("menu", menuGetIdDto);
@@ -77,17 +82,20 @@ public class MenuItemController {
     }
 
     @PostMapping("/admin/menu/update/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','EDITOR')")
     public String updateMenu(@PathVariable Long id, @ModelAttribute("menu")MenuUpdateDto menuUpdateDto){
         menuItemService.updateMenu(menuUpdateDto, id);
         return "redirect:/admin/menu";
     }
 
     @GetMapping("/admin/menu/delete/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public String deleteMenu(@PathVariable Long id){
         return "/dashboard/menu/delete";
     }
 
     @PostMapping("/admin/menu/delete/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public String removeMenu(@PathVariable Long id){
         menuItemService.deleteMenu(id);
         return "redirect:/admin/menu";

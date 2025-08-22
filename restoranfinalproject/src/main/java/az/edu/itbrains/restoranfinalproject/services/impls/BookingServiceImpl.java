@@ -1,6 +1,7 @@
 package az.edu.itbrains.restoranfinalproject.services.impls;
 
 import az.edu.itbrains.restoranfinalproject.dtos.booking.BookingDto;
+import az.edu.itbrains.restoranfinalproject.dtos.booking.BookingGetAllDto;
 import az.edu.itbrains.restoranfinalproject.models.Booking;
 import az.edu.itbrains.restoranfinalproject.repositories.BannerRepository;
 import az.edu.itbrains.restoranfinalproject.repositories.BookingRepository;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static org.codehaus.groovy.runtime.DefaultGroovyMethods.collect;
 
 @Service
 public class BookingServiceImpl implements BookingService {
@@ -61,5 +64,11 @@ public class BookingServiceImpl implements BookingService {
         return bookingRepository.findAll().stream()
                 .map(b-> modelMapper.map(b, BookingDto.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<BookingGetAllDto> bookingGetAll() {
+        List<BookingGetAllDto> getAllBooking = bookingRepository.findAll().stream().map(booking -> modelMapper.map(booking, BookingGetAllDto.class)).collect(Collectors.toList());
+        return getAllBooking;
     }
 }

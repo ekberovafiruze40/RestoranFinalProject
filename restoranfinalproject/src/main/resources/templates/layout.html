@@ -60,6 +60,7 @@
                     <a href="/about" class="nav-item nav-link">Haqqımızda</a>
                     <a href="/service" class="nav-item nav-link">Xidmətlər</a>
                     <a href="/menu" class="nav-item nav-link">Menyu</a>
+                    <a href="/drink" class="nav-item nav-link">İçkilər</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Səhifələr</a>
                         <div class="dropdown-menu m-0">
@@ -72,6 +73,9 @@
                     <a href="/contact" class="nav-item nav-link">Əlaqə</a>
                     <!-- Login düyməsi -->
                     <a th:href="@{/register}" class="nav-item nav-link">Qeydiyyat</a>
+                    <form action="/logout" method="post" class="nav-item nav-link"  style="margin-top: 5px;">
+                        <button type="submit" class="btn btn-outline-light btn-sm ms-2">Çıxış</button>
+                    </form>
                 </div>
             </div>
         </nav>

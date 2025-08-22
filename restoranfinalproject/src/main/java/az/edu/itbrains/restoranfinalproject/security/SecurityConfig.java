@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 
 
 @Configuration
@@ -27,20 +28,40 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
+        return (request, response, accessDeniedException) -> {
+            response.sendRedirect("/");
+        };
+    }
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((auth) -> auth
+                        .requestMatchers("/admin/**").hasAnyRole("ADMIN", "EDITOR")
+                        .requestMatchers("/admin/menu/create", "/admin/menu/delete/**").hasRole("ADMIN")
+                        .requestMatchers("/admin/menu/edit/**").hasAnyRole("ADMIN", "EDITOR")
+                        .requestMatchers("/admin/menu/**").hasAnyRole("ADMIN", "EDITOR")
                         .requestMatchers("/booking/**").authenticated()
                         .anyRequest().permitAll()
+                )
+                .exceptionHandling(ex -> ex
+                        .accessDeniedHandler(accessDeniedHandler())
+                        .authenticationEntryPoint((request, response, authException) -> {
+                            response.sendRedirect("/login");
+                        })
                 )
                 .formLogin(form -> form
                         .loginPage("/login").permitAll()
                         .loginProcessingUrl("/login")
                         .defaultSuccessUrl("/", true)  // login uğurlu olduqda ana səhifəyə yönləndir
                         .failureUrl("/login?error=true")  // səhv login zamanı login səhifəsində qalır
+                        .successHandler((request, response, authentication) -> {
+                            response.sendRedirect("/");
+                        })
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")

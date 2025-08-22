@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{/dashboard/layout}">
+<head>
+  <meta charset="UTF-8">
+  <title>Update</title>
+</head>
+<body >
+<div layout:fragment="body">
+  <form method="post" enctype="multipart/form-data">
+
+    <div class="form-group">
+      <input type="text" name="name" th:value="${drink.name}" class="form-control col-4"
+             placeholder="Name" required/>
+    </div>
+
+    <div class="form-group">
+            <textarea name="description" class="form-control col-4" placeholder="Drink Description" required
+                      th:text="${drink.description}"></textarea>
+    </div>
+
+    <div class="form-group">
+      <input type="text" name="imageUrl" th:value="${drink.imageUrl}" class="form-control col-4"
+             placeholder="ImageUrl" required/>
+    </div>
+
+    <div class="form-group">
+      <input type="text" name="price" th:value="${drink.price}" class="form-control col-4"
+             placeholder="Price" required/>
+    </div>
+
+
+    <div class="form-group">
+      <input type="submit" value="Update" class="btn btn-success"/>
+    </div>
+
+  </form>
+</div>
+
+</body>
+</html>

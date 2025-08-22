@@ -3,14 +3,12 @@
       layout:decorate="~{layout}">
 <head>
   <title>Menu</title>
-
 </head>
 
 <body>
 <div layout:fragment="content">
 
-
-
+  <!-- Hero Header -->
   <div class="container-xxl py-5 bg-dark hero-header mb-5">
     <div class="container text-center my-5 pt-5 pb-4">
       <h1 class="display-3 text-white mb-3 animated slideInDown">Food Menu</h1>
@@ -27,56 +25,55 @@
   <!-- Menu Start -->
   <div class="container-xxl py-5">
     <div class="container">
+
+      <!-- Section Title -->
       <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
         <h5 class="section-title ff-secondary text-center text-primary fw-normal">Menyu</h5>
         <h1 class="mb-5">Ləzzətli Seçimlər</h1>
       </div>
-      <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.1s">
-        <!-- CATEGORY NAV PILLS -->
-        <ul class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
-          <li class="nav-item" th:each="category, iterStat : ${uniqueCategories}">
-            <a class="d-flex align-items-center text-start mx-3 pb-3"
-               th:classappend="${iterStat.index == 0} ? 'active' : ''"
-               data-bs-toggle="pill"
-               th:href="'#tab-' + ${category.id}">
-              <i th:class="${category.icon} + ' fa-2x text-primary'"></i>
-              <div class="ps-3">
-                <small class="text-body" th:text="${category.tag}">Tag</small>
-                <h6 class="mt-n1 mb-0" th:text="${category.name}">Category Name</h6>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- TAB CONTENT -->
-        <div class="tab-content">
-          <div th:each="category, iterStat : ${uniqueCategories}"
-               th:id="'tab-' + ${category.id}"
-               th:class="'tab-pane fade show p-0 ' + (${iterStat.index == 0} ? 'active' : '')">
-            <div class="row g-4">
-              <div class="col-lg-6" th:each="menuItem : ${menuItems}">
-                <div th:if="${menuItem.category.id == category.id}">
-                  <div class="d-flex align-items-center">
-                    <img class="flex-shrink-0 img-fluid rounded"
-                         th:src="@{${menuItem.imageUrl}}"
-                         alt="image" style="width: 80px;">
-                    <div class="w-100 d-flex flex-column text-start ps-4">
-                      <h5 class="d-flex justify-content-between border-bottom pb-2">
-                        <span th:text="${menuItem.name}">Item Name</span>
-                        <span class="text-primary" th:text="${menuItem.price.amount + ' ' + menuItem.price.currency}">$0</span>
-                      </h5>
-                      <small class="fst-italic" th:text="${menuItem.description}">Description</small>
-                    </div>
-                  </div>
-                </div>
-              </div> <!-- col -->
-            </div> <!-- row -->
-          </div> <!-- tab-pane -->
-        </div> <!-- tab-content -->
-      </div> <!-- tab-class -->
+
+      <!-- Upper Categories (non-clickable, vizual) -->
+      <div class="text-center mb-4">
+        <div class="d-inline-flex justify-content-center">
+          <div th:each="category : ${uniqueCategories}" class="mx-3 text-center">
+            <i th:class="${category.icon} + ' fa-2x text-primary'"></i>
+            <div>
+              <small th:text="${category.tag}">Tag</small>
+              <h6 th:text="${category.name}">Category</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Buttons to filter menu items -->
+      <div class="text-center mb-4">
+        <form method="get" action="/menu">
+          <button name="categoryId" value="1" class="btn btn-outline-primary me-2">1</button>
+          <button name="categoryId" value="2" class="btn btn-outline-primary me-2">2</button>
+          <button name="categoryId" value="3" class="btn btn-outline-primary">3</button>
+        </form>
+      </div>
+
+      <!-- Menu Items -->
+      <div class="row g-4">
+        <div class="col-lg-6" th:each="menuItem : ${menuItems}">
+          <div class="d-flex align-items-center">
+            <img class="flex-shrink-0 img-fluid rounded" th:src="@{${menuItem.imageUrl}}" alt="image" style="width: 80px;">
+            <div class="w-100 d-flex flex-column text-start ps-4">
+              <h5 class="d-flex justify-content-between border-bottom pb-2">
+                <span th:text="${menuItem.name}">Item Name</span>
+                <span class="text-primary" th:text="${menuItem.price.amount + ' ' + menuItem.price.currency}">$0</span>
+              </h5>
+              <small class="fst-italic" th:text="${menuItem.description}">Description</small>
+            </div>
+          </div>
+        </div>
+      </div> <!-- row -->
+
     </div>
   </div>
   <!-- Menu End -->
-</div>
 
+</div>
 </body>
 </html>

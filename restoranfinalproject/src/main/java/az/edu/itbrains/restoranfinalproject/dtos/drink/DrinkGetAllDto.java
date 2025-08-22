@@ -1,4 +1,4 @@
-package az.edu.itbrains.restoranfinalproject.dtos.contact;
+package az.edu.itbrains.restoranfinalproject.dtos.drink;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,9 +9,10 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ContactCreateDto {
+public class DrinkGetAllDto {
+    private Long id;
     private String name;
-    private String email;
-    private String subject;
-    private String message;
+    private String description;
+    private String imageUrl;
+    private Double price;
 }

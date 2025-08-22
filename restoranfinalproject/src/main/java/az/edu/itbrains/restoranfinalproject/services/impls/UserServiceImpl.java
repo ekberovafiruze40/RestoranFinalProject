@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -37,12 +38,14 @@ public class UserServiceImpl implements UserService {
             return false;
         }
 
-        Optional<Role> roleOptional = roleRepository.findByName("ROLE_USER");
-        if (!roleOptional.isPresent()) {
-            System.out.println("Role ROLE_USER not found!");
-            return false;
-        }
-        Role userRole = roleOptional.get();
+//        Optional<Role> roleOptional = roleRepository.findByName("ROLE_USER");
+//        if (!roleOptional.isPresent()) {
+//            System.out.println("Role ROLE_USER not found!");
+//            return false;
+//        }
+//        Role userRole = roleOptional.get();
+        Role userRole = roleRepository.findByName("ROLE_USER")
+                .orElseThrow(()-> new RuntimeException("Role ROLE_USER not found!"));
 
         User user = new User();
         user.setFirstName(registerDto.getFirstName());
@@ -70,5 +73,44 @@ public class UserServiceImpl implements UserService {
         userDto.setLastName(user.getLastName());
         userDto.setEmail(user.getEmail());
         return userDto;
+    }
+
+    @Override
+    public void addRoleToUser(String email, String roleName) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(()->new RuntimeException("User not found with email: " + email));
+        Role role = roleRepository.findByName(roleName)
+                .orElseThrow(()->new RuntimeException("Role not found: " + roleName));
+        if (!user.getRoles().contains(role)){
+            user.getRoles().add(role);
+            userRepository.save(user);
+            System.out.println("Role " + roleName + " added to user " + email);
+        } else {
+            System.out.println("User already has role: " + roleName);
+        }
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public void deleteUserById(Long id) {
+        User user = userRepository.findById(id).orElseThrow(()-> new RuntimeException("İstifadəçi tapılmadı"));
+
+        user.getRoles().clear();
+        userRepository.save(user);
+        userRepository.deleteById(id);
+
+    }
+
+    @Override
+    public void updateUserRole(Long id, String role) {
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("İstifadəçi tapılmadı"));
+        Role role1 = roleRepository.findByName(role).orElseThrow(() -> new RuntimeException("Rol tapılmadı"));
+        user.getRoles().clear();
+        user.getRoles().add(role1);
+        userRepository.save(user);
     }
 }
